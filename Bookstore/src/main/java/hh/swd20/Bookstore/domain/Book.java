@@ -1,12 +1,19 @@
 package hh.swd20.Bookstore.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Book {
 
 	//attributes
+	@Id
+	private String isbn; //ajaa saman asian kuin Id(?)
 	private String title;
 	private String author;
 	private int year;
-	private String isbn;
 	private double price;
 	
 	//constructors
@@ -14,12 +21,12 @@ public class Book {
 		super();
 	}
 
-	public Book(String title, String author, int year, String isbn, double price) {
+	public Book(String isbn, String title, String author, int year, double price) {
 		super();
+		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
 		this.year = year;
-		this.isbn = isbn;
 		this.price = price;
 	}
 
