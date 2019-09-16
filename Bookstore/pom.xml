@@ -23,9 +23,6 @@
 	</properties>
 
 
-<!--  a.) Add JPA support and H2 database to your bookstore project (in GitHub) by modifying
-pom.xml file. -->
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

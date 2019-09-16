@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bookstore</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Book</h1>
+
+	
+	<form action="#" th:action="@{/savebook}" th:object= ${book} method="post">
+	<p>Title: <input type="text" th:field="${book.title}"/></p>
+	<p>Author: <input type="text" th:field="${book.author}"/></p>
+	<p>Year: <input type="text" th:field="${book.year}"/></p>
+	<p>ISBN: <input type="text" th:field="${book.isbn}"/></p>
+	<p>Price: <input type="text" th:field="${book.price}"/></p>
+	
+	<div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label for="deplist">Category</label>
+			 <select id="deplist" th:field="*{category}" class="form-control">
+       			<option th:each="category: ${categories}" th:value="${category.cateId}" th:text="${category.name}"></option>
+    		</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+	
+	
+	<input type="submit" value="Submit"/>
+	<input type="reset" value="Reset"/>
+	</form>
+
+    
+</body>
+</html>

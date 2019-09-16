@@ -4,30 +4,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
 
 	//attributes
 	@Id
-	private String isbn; //ajaa saman asian kuin Id(?)
+	private String isbn; //works as Id
 	private String title;
 	private String author;
 	private int year;
 	private double price;
+	
+	// TODO category
+
+	@ManyToOne
+	@JoinColumn(name="category")
+	private Category category;
+	
+	
 	
 	//constructors
 	public Book() {
 		super();
 	}
 
-	public Book(String isbn, String title, String author, int year, double price) {
+	public Book(String isbn, String title, String author, int year, double price, Category category) {
 		super();
 		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
 		this.year = year;
 		this.price = price;
+		this.category = category;
 	}
 
 	
@@ -52,6 +63,10 @@ public class Book {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public String getTitle() {
 		return title;
@@ -72,13 +87,17 @@ public class Book {
 	public double getPrice() {
 		return price;
 	}
+	
+	public Category getCategory() {
+		return category;
+	}
 
 	
 	//toString
 	@Override
 	public String toString() {
 		return "Book [title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn + ", price=" + price
-				+ "]";
+				+ "]"; //category not toString
 	}
 	
 	
