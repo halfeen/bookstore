@@ -17,8 +17,8 @@
 	<p>Price: <input type="text" th:field="${book.price}"/></p>
 	
 	<div style="clear: both; display: block; height: 10px;"></div>						
-		  	<label for="deplist">Category</label>
-			 <select id="deplist" th:field="*{category}" class="form-control">
+		  	<label for="list">Category</label>
+			 <select id="list" th:field="*{category}" class="form-control">
        			<option th:each="category: ${categories}" th:value="${category.cateId}" th:text="${category.name}"></option>
     		</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
