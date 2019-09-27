@@ -1,20 +1,22 @@
 package hh.swd20.Bookstore.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.Bookstore.domain.Book;
 import hh.swd20.Bookstore.domain.BookRepository;
 import hh.swd20.Bookstore.domain.CategoryRepository;
 
-//Add a new controller called BookController which handle get request to the path /index 
 @Controller
 public class BookController {
 	
@@ -23,47 +25,60 @@ public class BookController {
 	@Autowired
 	CategoryRepository cateRepository;
 
+	//Welcome index page
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String Books() {
-	
-	return "welcome";
+		return "welcome";
 	}
 	
+	//RESTful service to get all books
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
-	public String getBooks(Model model) {
-		List<Book> books = (List<Book>) bookRepository.findAll();
-		model.addAttribute("books", books);
-		return "booklist";
+	public @ResponseBody List<Book> getBookRest() {
+		return (List<Book>) bookRepository.findAll();
 	}
 	
 	
-	//Add Create and Delete functionalities to your Bookstore application
-	//For deletion use @PathVariable annotation
+	//RESTful service to get book by id
+	@RequestMapping(value="/books/{isbn}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Book> getBookRest(@PathVariable("isbn") String bookId) {
+		return bookRepository.findById(bookId);
+	}
 	
+	//Restful service to save new book
+	@RequestMapping(value="/books", method = RequestMethod.POST)
+	public @ResponseBody Book saveBookRest(@RequestBody Book book) {
+		return bookRepository.save(book);
+	}
 	
-	//empty form to add new book
+	//Home page of REST services
+	@RequestMapping(value="/resthome", method = RequestMethod.GET)
+	public String getRestHome() {
+		return "resthomepage"; //resthomepage.html
+	}
+	
+
+	//empty form to add new book 1
 	@RequestMapping(value = "/savebook", method = RequestMethod.GET)
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book());
 		model.addAttribute("categories", cateRepository.findAll());
 		return "addbook";
 	}
-	//saving the book
+	//saving the book 2
 	@RequestMapping(value= "/savebook", method = RequestMethod.POST)
 	public String saveNewBook(@ModelAttribute Book book) {
 		bookRepository.save(book);
 		return "redirect:/books";
-		//    	model.addAttribute("departments", drepository.findAll());
 	}
 	
-	//deleting a book
+	//deleting a book 3
 	@RequestMapping(value = "/deletebook/{isbn}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("isbn") String bookId) {
 		bookRepository.deleteById(bookId);
 		return "redirect:../books";
 	}
 	
-	//edit book
+	//edit book 4
 	@RequestMapping(value= "/editbook/{isbn}")
 	public String saveBook(@PathVariable("isbn") String bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
@@ -73,11 +88,6 @@ public class BookController {
 	
 }
 
-/*Add edit functionality to your bookstore. Create edit link after delete link to your listpage. Edit link
-will open current book in the edit page.
-Tip. Check ‘Add book’-functionality from the controller. In add functionality you added new book
-object to model but now you will add current book object to model. You also have to send current
-book id from the list page to controller (like you did in delete link).*/
 
 
 

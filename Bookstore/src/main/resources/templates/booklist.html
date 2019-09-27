@@ -20,7 +20,6 @@
 			<th> ISBN </th>
 			<th> Price </th>
 		</tr>
-		
 		<tr th:each="book : ${books}">
 			<td th:text="${book.title}">title</td>
 			<td th:text="${book.author}">author</td>
@@ -31,7 +30,6 @@
 			<td> <a class="btn btn-danger" th:href="@{/deletebook/{isbn}(isbn=${book.isbn})}">Delete</a></td>
 			<td> <a th:href="@{/editbook/{isbn}(isbn=${book.isbn})}">Edit</a></td>
 		</tr>
-	
 	</table>
 	<a class="btn btn-success" href="/savebook">New Book</a>
     
