@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.com">
+<head>
+	<meta charset="utf-8" />
+	<title>REST Home Page</title>
+</head>
+<body>
+	<h1>REST Home Page</h1>
+		<a href="/booklist">Back to the booklist</a>
+	<h2>All Books</h2>
+	<p>
+		<strong>Method:</strong> GET 
+		<strong>Endpoint:</strong> 
+		<strong><a href="/books">/books</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre>
+		<code>
+		[{
+			"isbn": "ISBN9876T",
+			"title": "Zzzzz",
+			"author":"Maija Mehiläinen",
+			"year": 1989,
+			"price": 5.99,
+			"category": "romance"
+		},
+		{
+			"isbn": "ISBN54321V",
+			"title": "Elämäni muro",
+			"author":"Matti Mörökölli",
+			"year": 1902,
+			"price": 399.99,
+			"category": "poetry"
+		},
+		{
+			"isbn": "ISBN12345Y",
+			"title": "The Talking Hat",
+			"author": "Luna Lovekiva",
+			"year": 2001,
+			"price": 19.99,
+			"category": "fantasy"
+		}]
+		</code>
+	</pre>
+	<h2>Book By ISBN</h2>
+	<p>
+		<strong> GET </strong>
+		<strong> /books/{isbn} </strong> 
+		<strong><a href="/books/ISBN54321V">/books/ISBN54321V</a></strong>
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre>
+		<code>
+		{
+			"isbn": "ISBN54321V",
+			"title": "Elämäni muro",
+			"author":"Matti Mörökölli",
+			"year": 1902,
+			"price": 399.99,
+			"category": "poetry"
+		}
+		</code>
+	</pre>
+	<h2>New Book</h2>
+	<p>
+		<strong> POST </strong> 
+		<strong> /books</strong> 
+		(Test with <a href="https://www.getpostman.com/" target="_blank">PostMan</a>/etc.)
+	</p>
+	<p>
+		<strong>JSON Example:</strong>
+	</p>
+	<pre>
+		<code>
+		{
+			"isbn": "ISBN54321P",
+			"title": "The love of my life",
+			"author":"Cheesy Cheeseball",
+			"year": 2012,
+			"price": 7.99,
+			"category": "romance"
+		}
+		</code>
+	</pre>
+</body>
+</html>

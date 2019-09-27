@@ -31,6 +31,14 @@ public class BookController {
 		return "welcome";
 	}
 	
+	//Listing all books
+	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
+	public String getBooks(Model model) {
+		List<Book> books = (List<Book>) bookRepository.findAll();
+		model.addAttribute("books", books);
+		return "booklist";
+	}
+	
 	//RESTful service to get all books
 	@RequestMapping(value = "/books", method = RequestMethod.GET)
 	public @ResponseBody List<Book> getBookRest() {
@@ -53,7 +61,7 @@ public class BookController {
 	//Home page of REST services
 	@RequestMapping(value="/resthome", method = RequestMethod.GET)
 	public String getRestHome() {
-		return "resthomepage"; //resthomepage.html
+		return "resthomepage";
 	}
 	
 
@@ -68,14 +76,14 @@ public class BookController {
 	@RequestMapping(value= "/savebook", method = RequestMethod.POST)
 	public String saveNewBook(@ModelAttribute Book book) {
 		bookRepository.save(book);
-		return "redirect:/books";
+		return "redirect:/booklist";
 	}
 	
 	//deleting a book 3
 	@RequestMapping(value = "/deletebook/{isbn}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("isbn") String bookId) {
 		bookRepository.deleteById(bookId);
-		return "redirect:../books";
+		return "redirect:../booklist";
 	}
 	
 	//edit book 4
