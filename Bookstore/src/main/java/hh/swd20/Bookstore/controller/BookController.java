@@ -70,7 +70,7 @@ public class BookController {
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book());
 		model.addAttribute("categories", cateRepository.findAll());
-		return "addbook";
+		return "savebook";
 	}
 	//saving the book 2
 	@RequestMapping(value= "/savebook", method = RequestMethod.POST)
@@ -87,11 +87,11 @@ public class BookController {
 	}
 	
 	//edit book 4
-	@RequestMapping(value= "/editbook/{isbn}")
+	@RequestMapping(value= "/savebook/{isbn}")
 	public String saveBook(@PathVariable("isbn") String bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
 		model.addAttribute("categories", cateRepository.findAll());
-		return "editbook";
+		return "savebook";
 	}
 	
 }

@@ -29,7 +29,7 @@
 			<td th:text="${book.isbn}">isbn</td>
 			<td th:text="${book.price}">price</td>
 			<td> <a class="btn btn-danger" th:href="@{/deletebook/{isbn}(isbn=${book.isbn})}">Delete</a></td>
-			<td> <a th:href="@{/editbook/{isbn}(isbn=${book.isbn})}">Edit</a></td>
+			<td> <a th:href="@{/savebook/{isbn}(isbn=${book.isbn})}">Edit</a></td>
 		</tr>
 	</table>
 	<a class="btn btn-success" href="/savebook">New Book</a>
