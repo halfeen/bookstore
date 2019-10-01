@@ -26,16 +26,21 @@ public class BookController {
 	CategoryRepository cateRepository;
 
 	//Welcome index page
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String Books() {
 		return "welcome";
 	}
 	
+	// Login
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+	
 	//Listing all books
 	@RequestMapping(value = "/booklist", method = RequestMethod.GET)
 	public String getBooks(Model model) {
-		List<Book> books = (List<Book>) bookRepository.findAll();
-		model.addAttribute("books", books);
+		model.addAttribute("books", bookRepository.findAll());
 		return "booklist";
 	}
 	

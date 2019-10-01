@@ -17,8 +17,6 @@ public class Book {
 	private String author;
 	private int year;
 	private double price;
-	
-	// TODO category
 
 	@ManyToOne
 	@JoinColumn(name="category")
