@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -70,28 +71,31 @@ public class BookController {
 	}
 	
 
-	//empty form to add new book 1
+	//adding new student
+    @PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/savebook", method = RequestMethod.GET)
 	public String getNewBookForm(Model model) {
 		model.addAttribute("book", new Book());
 		model.addAttribute("categories", cateRepository.findAll());
 		return "savebook";
 	}
-	//saving the book 2
+	//saving the book
 	@RequestMapping(value= "/savebook", method = RequestMethod.POST)
 	public String saveNewBook(@ModelAttribute Book book) {
 		bookRepository.save(book);
 		return "redirect:/booklist";
 	}
 	
-	//deleting a book 3
+	//deleting a book
+    @PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/deletebook/{isbn}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("isbn") String bookId) {
 		bookRepository.deleteById(bookId);
 		return "redirect:../booklist";
 	}
 	
-	//edit book 4
+	//edit book
+    @PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value= "/savebook/{isbn}")
 	public String saveBook(@PathVariable("isbn") String bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
